@@ -1,8 +1,14 @@
 #WARNING
+
 #ПРЕДУПРЕЖДЕНИЕ
-INSTALLATION SCRIPTS ARE STILL IN DEVELOPMENT. WE STRONGLY REQUEST YOU LAUNCH THEM VIA A PYTHON FILE.
+
 
 INSTALLATION SCRIPTS ARE STILL IN DEVELOPMENT. WE STRONGLY REQUEST YOU LAUNCH THEM VIA A PYTHON FILE.
+
+
+INSTALLATION SCRIPTS ARE STILL IN DEVELOPMENT. WE STRONGLY REQUEST YOU LAUNCH THEM VIA A PYTHON FILE.
+
+
 # cubeplayer
 
 `cubeplayer` is a lightweight terminal music player that plays local audio files directly from the command line. It focuses on simplicity and a clean user experience, providing basic playback controls without unnecessary complexity. Great for quick listening sessions when you don’t want to open a full GUI player.
