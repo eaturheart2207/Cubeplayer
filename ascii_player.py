@@ -170,16 +170,30 @@ def draw_ui(
     stdscr.erase()
     height, width = stdscr.getmaxyx()
 
+    def safe_addstr(y_pos: int, x_pos: int, text: str) -> None:
+        if y_pos < 0 or y_pos >= height:
+            return
+        if x_pos < 0 or x_pos >= width:
+            return
+        if x_pos + len(text) > width:
+            text = text[: max(0, width - x_pos)]
+        if not text:
+            return
+        try:
+            stdscr.addstr(y_pos, x_pos, text)
+        except curses.error:
+            return
+
     def draw_box(y: int, title: str, lines: List[str]) -> int:
         inner_width = max(10, width - 4)
         top = f"┌{title.center(inner_width, '─')}┐"
-        stdscr.addstr(y, 1, top[: width - 2])
+        safe_addstr(y, 1, top[: width - 2])
         y += 1
         for line in lines:
             padded = line.ljust(inner_width)
-            stdscr.addstr(y, 1, f"│{padded}│"[: width - 2])
+            safe_addstr(y, 1, f"│{padded}│"[: width - 2])
             y += 1
-        stdscr.addstr(y, 1, f"└{'─' * inner_width}┘"[: width - 2])
+        safe_addstr(y, 1, f"└{'─' * inner_width}┘"[: width - 2])
         return y + 1
 
     if not tracks:
@@ -198,7 +212,7 @@ def draw_ui(
     for idx, line in enumerate(banner):
         if idx >= height:
             break
-        stdscr.addstr(idx, max(0, (width - len(line)) // 2), line[: width - 1])
+        safe_addstr(idx, max(0, (width - len(line)) // 2), line[: width - 1])
 
     current = tracks[current_index]
     status = "Paused" if paused else "Playing"
@@ -234,22 +248,6 @@ def draw_ui(
     )
 
     inner_width = max(10, width - 4)
-    bars = max(10, inner_width // 2)
-    max_height = 8
-    viz_lines = []
-    for row in range(max_height, 0, -1):
-        line_chars = []
-        for idx in range(bars):
-            wave = (1 + math.sin(viz_phase + idx * 0.5)) / 2
-            level = 1 + int(wave * (max_height - 1))
-            line_chars.append("█" if level >= row else " ")
-            line_chars.append(" ")
-        line = "".join(line_chars)[:inner_width].ljust(inner_width)
-        viz_lines.append(line)
-    y = draw_box(y, " Visualizer ", viz_lines)
-
-    y = draw_box(y, " Tags ", tags_summary)
-
     if show_keys:
         keys_lines = [
             "Space: Play/Pause",
@@ -266,6 +264,22 @@ def draw_ui(
             "+/-: Volume",
         ]
         y = draw_box(y, " Keys ", keys_lines)
+    else:
+        bars = max(10, inner_width // 2)
+        max_height = 8
+        viz_lines = []
+        for row in range(max_height, 0, -1):
+            line_chars = []
+            for idx in range(bars):
+                wave = (1 + math.sin(viz_phase + idx * 0.5)) / 2
+                level = 1 + int(wave * (max_height - 1))
+                line_chars.append("█" if level >= row else " ")
+                line_chars.append(" ")
+            line = "".join(line_chars)[:inner_width].ljust(inner_width)
+            viz_lines.append(line)
+        y = draw_box(y, " Visualizer ", viz_lines)
+
+    y = draw_box(y, " Tags ", tags_summary)
 
     list_height = max(3, height - y - 3)
     start = max(0, selection_index - list_height // 2)
@@ -285,7 +299,7 @@ def draw_ui(
     footer = "[Space]Play/Pause [n/p]Track [k]Keys [q]Quit"
     if status_message:
         footer = f"{footer} | {status_message}"
-    stdscr.addstr(height - 1, 0, footer[: width - 1])
+    safe_addstr(height - 1, 0, footer[: width - 1])
     stdscr.refresh()
 
 
@@ -326,8 +340,22 @@ def browse_for_folder(
         stdscr.erase()
         height, width = stdscr.getmaxyx()
         title = "Select path (Enter=open, Space=choose, Backspace=up, q=cancel)"
-        stdscr.addstr(0, 2, title[: width - 4])
-        stdscr.addstr(1, 2, f"Current: {current_dir}"[: width - 4])
+        def safe_addstr(y_pos: int, x_pos: int, text: str) -> None:
+            if y_pos < 0 or y_pos >= height:
+                return
+            if x_pos < 0 or x_pos >= width:
+                return
+            if x_pos + len(text) > width:
+                text = text[: max(0, width - x_pos)]
+            if not text:
+                return
+            try:
+                stdscr.addstr(y_pos, x_pos, text)
+            except curses.error:
+                return
+
+        safe_addstr(0, 2, title[: width - 4])
+        safe_addstr(1, 2, f"Current: {current_dir}"[: width - 4])
 
         entries: List[Tuple[str, bool]] = []
         try:
@@ -346,7 +374,7 @@ def browse_for_folder(
             entries.insert(0, ("..", True))
 
         if not entries:
-            stdscr.addstr(3, 2, "<empty>")
+            safe_addstr(3, 2, "<empty>")
 
         list_height = height - 6
         start = max(0, selection - list_height // 2)
@@ -356,7 +384,7 @@ def browse_for_folder(
             marker = ">" if idx == selection else " "
             suffix = "/" if is_dir else ""
             line = f"{marker} {name}{suffix}"
-            stdscr.addstr(3 + idx - start, 2, line[: width - 4])
+            safe_addstr(3 + idx - start, 2, line[: width - 4])
 
         stdscr.refresh()
         key = stdscr.getch()
