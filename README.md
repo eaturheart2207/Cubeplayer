@@ -56,10 +56,9 @@ python3 -m pip install --user mutagen
 
 ## Screenshot
 
-```
-<img width="1920" height="1080" alt="изображение" src="https://github.com/user-attachments/assets/9b798536-598d-4dee-ae28-a6843903231e" />
 
-```
+<img width="1920" height="1080" alt="изображение" src="https://github.com/user-attachments/assets/0a48f6d7-17b9-4eff-a03e-2810fb3df4b1" />
+
 
 ---
 
@@ -121,7 +120,5 @@ python3 -m pip install --user mutagen
 
 ## Скриншот
 
-```
-<img width="1920" height="1080" alt="изображение" src="https://github.com/user-attachments/assets/0885f9e3-7ffb-4434-a4f5-06418f3f003e" />
 
-```
+<img width="1920" height="1080" alt="изображение" src="https://github.com/user-attachments/assets/b0e75cb3-afa4-4986-b92d-814d55ae9c78" />
