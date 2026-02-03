@@ -12,7 +12,7 @@
 Make sure Python 3 is installed. Required packages will be installed automatically on first run:
 
 ```bash
-./cubeplayer path/to/song.mp3
+python install.py
 ```
 
 (Windows: use `cubeplayer.cmd` or `cubeplayer.ps1`)
@@ -25,10 +25,10 @@ python3 -m pip install --user pygame mutagen
 python3 ascii_player.py path/to/song.mp3
 ```
 
-## Usage
+## Usage(Linux)
 
 ```bash
-./cubeplayer "music/track.mp3"
+cubeplayer "music/track.mp3"
 ```
 
 You can pass any local audio file supported by your system libraries.
@@ -76,7 +76,7 @@ python3 -m pip install --user mutagen
 Нужен Python 3. Зависимости устанавливаются автоматически при первом запуске:
 
 ```bash
-./cubeplayer путь/к/треку.mp3
+python install.py
 ```
 
 (Windows: используйте `cubeplayer.cmd` или `cubeplayer.ps1`)
@@ -89,10 +89,10 @@ python3 -m pip install --user pygame mutagen
 python3 ascii_player.py путь/к/треку.mp3
 ```
 
-## Использование
+## Использование(Linux)
 
 ```bash
-./cubeplayer "music/track.mp3"
+cubeplayer "music/track.mp3"
 ```
 
 Поддерживается любой локальный аудиофайл, который может воспроизвести ваша система.
