@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-set -e
-echo "cubeplayer"
-python3 -m pip install --user --upgrade pip
-python3 -m pip install --user pygame mutagen
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-python3 "$SCRIPT_DIR/ascii_player.py" "$@"
