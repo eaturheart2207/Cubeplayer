@@ -1,14 +1,3 @@
-#WARNING
-
-#ПРЕДУПРЕЖДЕНИЕ
-
-
-INSTALLATION SCRIPTS ARE STILL IN DEVELOPMENT. WE STRONGLY REQUEST YOU LAUNCH THEM VIA A PYTHON FILE.
-
-
-INSTALLATION SCRIPTS ARE STILL IN DEVELOPMENT. WE STRONGLY REQUEST YOU LAUNCH THEM VIA A PYTHON FILE.
-
-
 # cubeplayer
 
 `cubeplayer` is a lightweight terminal music player that plays local audio files directly from the command line. It focuses on simplicity and a clean user experience, providing basic playback controls without unnecessary complexity. Great for quick listening sessions when you don’t want to open a full GUI player.
@@ -59,7 +48,7 @@ You can pass any local audio file supported by your system libraries.
 - **q** — Quit
 
 ## Music tags
-Tag display requires the optional `mutagen` package. If you see “Tags unavailable”, install it:
+Tag display requires the optional `mutagen` package. If you see “Tags unavailable”(This can also be displayed if the song has no tags at all.), install it:
 
 ```bash
 python3 -m pip install --user mutagen
@@ -123,7 +112,7 @@ python3 ascii_player.py путь/к/треку.mp3
 - **q** — Выход
 
 ## Теги музыки
-Отображение тегов требует опциональный пакет `mutagen`. Если видишь “Tags unavailable”, установи его:
+Отображение тегов требует опциональный пакет `mutagen`. Если видишь “Tags unavailable”(Также это может отображаться если у песни вообще нету тегов), установи его:
 
 ```bash
 python3 -m pip install --user mutagen
